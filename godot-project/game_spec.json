@@ -1,0 +1,249 @@
+{
+  "game": {
+    "name": "Deep Sea Quest",
+    "type": "2D",
+    "description": "Pilot a small research submarine through an enchanting underwater world, collecting rare pearls while navigating treacherous caves, avoiding deadly mines and predatory fish, and uncovering ancient ruins. Manage your oxygen supply to survive the depths.",
+    "genre": "action",
+    "version": "1.0.0"
+  },
+  "settings": {
+    "window": {
+      "width": 1280,
+      "height": 720,
+      "resizable": true
+    },
+    "physics": {
+      "enabled": true,
+      "gravity": {
+        "x": 0,
+        "y": 980
+      }
+    },
+    "rendering": {}
+  },
+  "scenes": [
+    {
+      "name": "Main",
+      "type": "2D",
+      "path": "res://scenes/Main.tscn",
+      "nodes": [
+        {
+          "name": "Root",
+          "type": "Node2D",
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "children": [
+            {
+              "name": "Research Submarine",
+              "type": "CharacterBody2D",
+              "position": {
+                "x": 100,
+                "y": 300,
+                "z": 0
+              },
+              "children": [
+                {
+                  "name": "Sprite2D",
+                  "type": "Sprite2D",
+                  "position": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "properties": {
+                    "texture": ""
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Camera",
+              "type": "Camera2D",
+              "position": {
+                "x": 0,
+                "y": 0,
+                "z": 5
+              },
+              "properties": {}
+            },
+            {
+              "name": "Jellyfish",
+              "type": "CharacterBody2D",
+              "position": {
+                "x": 300,
+                "y": 300,
+                "z": 0
+              },
+              "children": [
+                {
+                  "name": "Sprite2D",
+                  "type": "Sprite2D",
+                  "position": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "properties": {
+                    "texture": ""
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Stingray",
+              "type": "CharacterBody2D",
+              "position": {
+                "x": 400,
+                "y": 300,
+                "z": 0
+              },
+              "children": [
+                {
+                  "name": "Sprite2D",
+                  "type": "Sprite2D",
+                  "position": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "properties": {
+                    "texture": ""
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Angler Fish",
+              "type": "CharacterBody2D",
+              "position": {
+                "x": 500,
+                "y": 300,
+                "z": 0
+              },
+              "children": [
+                {
+                  "name": "Sprite2D",
+                  "type": "Sprite2D",
+                  "position": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "properties": {
+                    "texture": ""
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Sea Mine",
+              "type": "CharacterBody2D",
+              "position": {
+                "x": 600,
+                "y": 300,
+                "z": 0
+              },
+              "children": [
+                {
+                  "name": "Sprite2D",
+                  "type": "Sprite2D",
+                  "position": {
+                    "x": 0,
+                    "y": 0
+                  },
+                  "properties": {
+                    "texture": ""
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "camera": {
+        "type": "Camera2D",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    }
+  ],
+  "assets": {
+    "sprites": [
+      {
+        "name": "submarine",
+        "path": "res://assets/sprites/submarine.png",
+        "type": "vehicle"
+      },
+      {
+        "name": "jellyfish",
+        "path": "res://assets/sprites/jellyfish.png",
+        "type": "enemy"
+      },
+      {
+        "name": "stingray",
+        "path": "res://assets/sprites/stingray.png",
+        "type": "enemy"
+      },
+      {
+        "name": "angler_fish",
+        "path": "res://assets/sprites/angler_fish.png",
+        "type": "enemy"
+      },
+      {
+        "name": "sea_mine",
+        "path": "res://assets/sprites/sea_mine.png",
+        "type": "obstacle"
+      },
+      {
+        "name": "pearl",
+        "path": "res://assets/sprites/pearl.png",
+        "type": "collectible"
+      },
+      {
+        "name": "bubble_particles",
+        "path": "res://assets/sprites/bubbles.png",
+        "type": "particle"
+      }
+    ],
+    "sounds": [
+      {
+        "name": "thrust",
+        "path": "res://assets/sounds/thrust.wav",
+        "type": "sfx"
+      },
+      {
+        "name": "collect_pearl",
+        "path": "res://assets/sounds/collect.wav",
+        "type": "sfx"
+      },
+      {
+        "name": "damage",
+        "path": "res://assets/sounds/damage.wav",
+        "type": "sfx"
+      },
+      {
+        "name": "underwater_bubbles",
+        "path": "res://assets/sounds/bubbles.wav",
+        "type": "ambient"
+      },
+      {
+        "name": "danger_alert",
+        "path": "res://assets/sounds/alert.wav",
+        "type": "sfx"
+      }
+    ],
+    "music": [
+      {
+        "name": "exploration_theme",
+        "path": "res://assets/music/underwater_exploration.ogg"
+      },
+      {
+        "name": "danger_theme",
+        "path": "res://assets/music/tension_depths.ogg"
+      }
+    ]
+  },
+  "scripts": []
+}
