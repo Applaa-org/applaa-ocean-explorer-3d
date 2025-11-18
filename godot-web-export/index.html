@@ -45,15 +45,62 @@
         .hud {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-top: 10px;
             font-size: 16px;
             font-weight: bold;
+        }
+        .hud-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
         .oxygen {
             color: #ff6b6b;
         }
         .score {
             color: #ffd700;
+        }
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #99ccff;
+            background: rgba(0, 191, 255, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 191, 255, 0.3);
+        }
+        .speed-control label {
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .speed-control input[type="range"] {
+            width: 100px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .speed-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #00bfff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+        }
+        .speed-control input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #00bfff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
         }
         .controls {
             margin-top: 15px;
@@ -79,8 +126,14 @@
         <h1>🌊 Deep Sea Pearl Quest</h1>
         <div class="info">Pilot your research submarine through enchanting underwater caves. Collect rare pearls, avoid deadly mines and predatory fish, manage your oxygen, and uncover secrets. Survive the depths!</div>
         <div class="hud">
-            <div class="oxygen">Oxygen: <span id="oxygen">100</span>%</div>
-            <div class="score">Pearls: <span id="pearls">0</span> / 10</div>
+            <div class="hud-left">
+                <div class="oxygen">Oxygen: <span id="oxygen">100</span>%</div>
+                <div class="score">Pearls: <span id="pearls">0</span> / 10</div>
+                <div class="speed-control">
+                    <label for="speedSlider">Speed: <span id="speedValue">3</span></label>
+                    <input type="range" id="speedSlider" min="1" max="5" value="3" step="0.5">
+                </div>
+            </div>
         </div>
         <canvas id="gameCanvas" width="800" height="600"></canvas>
         <div class="controls">
@@ -88,7 +141,7 @@
         </div>
         <div id="gameOver" class="game-over">
             <h2 id="gameOverTitle">Game Over</h2>
-            <p id="gameOverText">You ran out of oxygen!</p>
+            <p id="gameOverText">You ran out of oxygen! Explore faster next time.</p>
             <button onclick="resetGame()" style="background: #00bfff; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Play Again</button>
         </div>
     </div>
@@ -97,6 +150,8 @@
         const ctx = canvas.getContext('2d');
         const oxygenElement = document.getElementById('oxygen');
         const pearlsElement = document.getElementById('pearls');
+        const speedSlider = document.getElementById('speedSlider');
+        const speedValue = document.getElementById('speedValue');
         const gameOverDiv = document.getElementById('gameOver');
         const gameOverTitle = document.getElementById('gameOverTitle');
         const gameOverText = document.getElementById('gameOverText');
@@ -120,7 +175,7 @@
             y: 300,
             width: 40,
             height: 20,
-            speed: 3,
+            speed: 3, // Initial speed, updated by slider
             boostSpeed: 6,
             color: '#00bfff',
             oxygenDrainRate: 0.1, // per frame
@@ -190,6 +245,12 @@
         
         let keys = {};
         let lastTime = 0;
+        
+        // Speed control event listener
+        speedSlider.addEventListener('input', (e) => {
+            player.speed = parseFloat(e.target.value);
+            speedValue.textContent = player.speed.toFixed(1);
+        });
         
         document.addEventListener('keydown', (e) => {
             keys[e.key.toLowerCase()] = true;
@@ -323,6 +384,9 @@
             };
             player.x = 100;
             player.y = 300;
+            player.speed = 3; // Reset speed
+            speedSlider.value = 3;
+            speedValue.textContent = 3;
             pearls.forEach(pearl => pearl.collected = false);
             enemies[0].y = 150; // Reset positions
             enemies[1].x = 400;
@@ -477,6 +541,9 @@
             
             requestAnimationFrame(gameLoop);
         }
+        
+        // Initialize speed display
+        speedValue.textContent = player.speed;
         
         gameLoop(0);
         
